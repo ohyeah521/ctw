@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>提示</title>
+  <link rel="stylesheet" href="<?php echo asset('bootstrap/css/bootstrap.min.css'); ?>">
+  <script src="<?php echo asset('js/jquery.js'); ?>"></script>
+  <script src="<?php echo asset('bootstrap/js/bootstrap.min.js'); ?>"></script>
+  <link rel="stylesheet" href="<?php echo asset('css/style.css'); ?>">
+</head>
+<body>
+  <div class="container">
+    <div class="jumbotron">
+      <h1><?php echo $msg; ?></h1>
+      <p>将在 <?php echo $time; ?> 秒后跳转</p>
+    </div>
+  </div>
+</body>
+</html>

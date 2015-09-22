@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>控制台</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="<?php echo asset('bootstrap/css/bootstrap.min.css'); ?>">
+  <script src="<?php echo asset('js/jquery.js'); ?>"></script>
+  <script src="<?php echo asset('bootstrap/js/bootstrap.min.js'); ?>"></script>
+  <link rel="stylesheet" href="<?php echo asset('css/style.css'); ?>">
+  <script src="<?php echo asset('js/common.js'); ?>"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- 导航条 -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">管理员控制台</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <div class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="邮箱" name="email">
+            </div>
+            <button type="button" class="btn btn-default" id="search">搜索</button>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="<?php echo url('admin','index'); ?>">用户列表</a></li>
+            <li><a href="<?php echo url('admin','run'); ?>">运行列表</a></li>
+            <li class="active"><a href="<?php echo url('admin','open'); ?>">开通用户</a></li>
+            <li><a href="<?php echo url('index','index'); ?>">返回首页</a></li>
+            <li><a href="<?php echo url('admin','logout'); ?>">退出登录</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!-- /导航条 -->
+
+    <!-- 开通 -->
+    <div class="h10"></div>
+    <div class="panel panel-default">
+      <div class="panel-heading">开户</div>
+      <div class="panel-body">
+        <div class="row">
+          <form method="post" action="<?php echo url('admin','open_store'); ?>">
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="邮箱" name="email" value="<?php echo empty($_GET['email']) ? '' : $_GET['email']; ?>" required>
+              </div><!-- /input-group -->
+            </div><!-- /.col-lg-3 -->
+            <div class="col-lg-3">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                <input type="text" class="form-control" placeholder="月数" name="month" required>
+              </div><!-- /input-group -->
+            </div><!-- /.col-lg-3 -->
+            <div class="col-lg-3">
+              <button type="submit" class="btn btn-primary">确定</button>
+            </div><!-- /.col-lg-3 -->
+          </form>
+        </div><!-- /.row -->
+      </div>
+    </div>
+    <!-- /开通 -->
+  </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>控制台登陆</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="<?php echo asset('bootstrap/css/bootstrap.min.css'); ?>">
+  <script src="<?php echo asset('js/jquery.js'); ?>"></script>
+  <script src="<?php echo asset('bootstrap/js/bootstrap.min.js'); ?>"></script>
+  <link rel="stylesheet" href="<?php echo asset('css/style.css'); ?>">
+</head>
+<body>
+  <div class="admin_login">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">管理员登陆</h3>
+      </div>
+      <div class="panel-body">
+        <form action="<?php echo url('login','admin_store'); ?>" method="post">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+            <input type="email" class="form-control" placeholder="邮箱" name="email">
+          </div>
+          <div class="h10"></div>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input type="password" class="form-control" placeholder="密码" name="pass">
+          </div>
+          <div class="h10"></div>
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+            <input type="text" class="form-control" placeholder="验证码" name="code">
+          </div>
+          <div class="h10"></div>
+          <img src="<?php echo url('index','validate'); ?>" alt="验证码" onclick="this.src='<?php echo url('index','validate').'&rand='; ?>'+Math.random();" title="点击刷新">
+          <div class="h10"></div>
+          <button type="submit" class="btn btn-primary admin_login_submit">确定</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

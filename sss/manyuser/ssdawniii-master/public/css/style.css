@@ -1,0 +1,28 @@
+.h10 {
+  height:10px;
+  clear: both;
+}
+
+.ul {
+  margin-bottom: 0px;
+}
+
+.pagination {
+  margin: 0px;
+}
+
+.navbar {
+  border-radius: 0px;
+}
+.navbar,.table {
+  margin-bottom: 0px;
+}
+
+.admin_login {
+  width: 300px;
+  margin: 100px auto;
+}
+
+.admin_login_submit {
+  width: 100%;
+}

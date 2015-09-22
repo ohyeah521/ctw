@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>系统出错</title>
+</head>
+<style>
+  * {
+    margin: 0px;
+    padding: 0px;
+  }
+  body {
+    background: #f1f1f1;
+    font-size: 14px;
+  }
+  .head,.main {
+    width: 680px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    background: white;
+    padding: 20px;
+  }
+  .head .title {
+    font-size: 20px;
+  }
+  .main p {
+    margin-bottom: 15px;
+  }
+  .main .msg {
+    font-size: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
+  }
+  .main .trace {
+    line-height: 20px;
+    color: #777;
+  }
+</style>
+<body>
+  <div class="head">
+    <p class="title">系统出现问题了 :(</p>
+  </div>
+  <div class="main">
+    <p class="msg"><?php echo $e->getMessage(); ?></p>
+    <p>File：<?php echo $e->getFile(); ?></p>
+    <p>Line：第 <?php echo $e->getLine(); ?> 行</p>
+    <p class="trace"><?php echo nl2br($e->getTraceAsString());?></p>
+  </div>
+</body>
+</html>

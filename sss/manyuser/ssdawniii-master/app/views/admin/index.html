@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>控制台 - 用户列表</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="<?php echo asset('bootstrap/css/bootstrap.min.css'); ?>">
+  <script src="<?php echo asset('js/jquery.js'); ?>"></script>
+  <script src="<?php echo asset('bootstrap/js/bootstrap.min.js'); ?>"></script>
+  <link rel="stylesheet" href="<?php echo asset('css/style.css'); ?>">
+  <script src="<?php echo asset('js/common.js'); ?>"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- 导航条 -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">管理员控制台</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <div class="navbar-form navbar-right" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="邮箱" name="email">
+            </div>
+            <button type="button" class="btn btn-default" id="search">搜索</button>
+          </div>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="active"><a href="<?php echo url('admin','index'); ?>">用户列表</a></li>
+            <li><a href="<?php echo url('admin','run'); ?>">运行列表</a></li>
+            <li><a href="<?php echo url('admin','open'); ?>">开通用户</a></li>
+            <li><a href="<?php echo url('index','index'); ?>">返回首页</a></li>
+            <li><a href="<?php echo url('admin','logout'); ?>">退出登录</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!-- /导航条 -->
+
+    <!-- 用户列表 -->
+    <div class="h10"></div>
+    <div class="panel panel-default">
+      <div class="panel-heading">用户列表（<?php echo $count; ?>）</div>
+      <div class="panel-body">
+        <?php if(empty($list)): ?>
+          <h2>not found</h2>
+        <?php else: ?>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="10%">ID</th>
+                <th width="20%">邮箱</th>
+                <th width="20%">注册时间</th>
+                <th width="20%">最后登陆时间</th>
+                <th width="10%">开通数量</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($list as $v): ?>
+                <tr>
+                  <td><?php echo $v['id']; ?></td>
+                  <td><?php echo $v['email']; ?></td>
+                  <td><?php echo date('Y-m-d H:i',$v['reg_time']); ?></td>
+                  <td><?php echo date('Y-m-d H:i',$v['last_login_time']); ?></td>
+                  <td>
+                    <?php if($v['count'] != 0): ?>
+                      <a href="<?php echo url('admin','run','&email='.$v['email']); ?>">查看（<?php echo $v['count']; ?>）</a>
+                    <?php else: ?>
+                      <a href="<?php echo url('admin','open','&email='.$v['email']); ?>">开通</a>
+                    <?php endif; ?>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        <?php endif; ?>
+      </div>
+      <div class="panel-footer">
+        <!-- 分页 -->
+        <?php echo $page; ?>
+        <!-- /分页 -->
+      </div>
+    </div>
+    <!-- /用户列表 -->
+  </div>
+</body>
+</html>

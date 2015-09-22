@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>用户中心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="<?php echo asset('bootstrap/css/bootstrap.min.css'); ?>">
+  <script src="<?php echo asset('js/jquery.js'); ?>"></script>
+  <script src="<?php echo asset('bootstrap/js/bootstrap.min.js'); ?>"></script>
+  <link rel="stylesheet" href="<?php echo asset('css/style.css'); ?>">
+  <script src="<?php echo asset('js/common.js'); ?>"></script>
+</head>
+<body>
+  <div class="container">
+    <!-- 导航条 -->
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">用户中心</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="<?php echo url('index','index'); ?>">首页</a></li>
+            <li><a href="<?php echo url('member','logout'); ?>">退出登陆</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!-- /导航条 -->
+
+    <!-- 用户信息 -->
+    <div class="h10"></div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">基本信息</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>邮箱</th>
+              <th>注册时间</th>
+              <th>最后登陆时间</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><?php echo $userData['email']; ?></td>
+                <td><?php echo date('Y-m-d H:i',$userData['reg_time']); ?></td>
+                <td><?php echo date('Y-m-d H:i',$userData['last_login_time']); ?></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- /用户信息 -->
+
+    <!-- 运行信息 -->
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">运行信息</h3>
+      </div>
+      <div class="panel-body">
+        <?php if(empty($list)): ?>
+          <h2>您还没有开通任何业务</h2>
+        <?php else: ?>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th width="10%">端口</th>
+                <th width="10%">密码</th>
+                <th width="15%">使用流量</th>
+                <th width="15%">最后连接时间</th>
+                <th width="10%">开通时间</th>
+                <th width="10%">到期时间</th>
+                <th width="10%">剩余时间</th>
+                <th width="10%">状态</th>
+                <th width="10%">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <?php foreach($list as $v): ?>
+                <tr>
+                  <td><?php echo $v['port']; ?></td>
+                  <td><?php echo $v['passwd']; ?></td>
+                  <td>
+                    <div class="progress">
+                    <?php
+                      $use = $v['u'] + $v['d'];
+                      $baifen = bcdiv($use,$v['transfer_enable'],2) * 100;
+                    ?>
+                      <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $baifen; ?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $baifen; ?>%">
+                        <?php echo $baifen; ?>%
+                      </div>
+                    </div>
+                  </td>
+                  <td><?php echo empty($v['t']) ? '无' : date('Y-m-d H:i',$v['t']); ?></td>
+                  <td><?php echo date('Y-m-d',$v['start_time']); ?></td>
+                  <td><?php echo date('Y-m-d',$v['end_time']); ?></td>
+                  <td><?php echo (data_to_ymd_num($v['end_time']) - data_to_ymd_num(time())) / 86400; ?> 天</td>
+                  <td>
+                    <?php
+                      if ($v['enable'] == 1) {
+                        echo '运行中';
+                      } else {
+                        echo '已停止';
+                      }
+                    ?>
+                  </td>
+                  <td>
+                    <form action="<?php echo url('member','changeRunpwd'); ?>" method="post">
+                      <input type="hidden" name="email" value="<?php echo $v['email']; ?>">
+                      <input type="hidden" name="id" value="<?php echo $v['id']; ?>">
+                    </form>
+                    <a href="javascript:;" class="changeRunpwd">重置密码</a>
+                  </td>
+                </tr>
+              <?php endforeach; ?>
+            </tbody>
+          </table>
+        <?php endif; ?>
+      </div>
+    </div>
+    <!-- /上网信息 -->
+  </div>
+</body>
+</html>

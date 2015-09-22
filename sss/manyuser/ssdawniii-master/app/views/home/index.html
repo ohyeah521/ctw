@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>shadowsocks 科学上网</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="<?php echo asset('bootstrap/css/bootstrap.min.css'); ?>">
+  <script src="<?php echo asset('js/jquery.js'); ?>"></script>
+  <script src="<?php echo asset('bootstrap/js/bootstrap.min.js'); ?>"></script>
+  <link rel="stylesheet" href="<?php echo asset('css/style.css'); ?>">
+</head>
+<body>
+  <div class="container">
+    <!-- 导航条 -->
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Shadowsocks 科学上网</a>
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <?php if(!is_login()): ?>
+            <li><a href="javascript:;" data-toggle="modal" data-target=".reg">注册</a></li>
+            <li><a href="javascript:;" data-toggle="modal" data-target=".login">登陆</a></li>
+            <?php else: ?>
+            <li><a href="<?php echo url('member','index'); ?>">用户中心</a></li>
+            <?php endif; ?>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!-- /导航条 -->
+
+    <!-- 巨幕 -->
+    <div class="jumbotron">
+      <h1><i class="glyphicon glyphicon-send"></i> Shadowsocks 带你畅游网络世界</h1>
+    </div>
+    <!-- /巨幕 -->
+
+    <!-- 注册框 -->
+    <div class="modal reg fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">注册</h4>
+          </div>
+          <form action="<?php echo url('reg','store'); ?>" method="post">
+            <div class="modal-body">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="邮箱" name="email" required>
+              </div>
+              <div class="h10"></div>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" class="form-control" placeholder="密码" name="pass" required>
+              </div>
+              <div class="h10"></div>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-barcode"></i></span>
+                <input type="text" class="form-control" placeholder="验证码" name="code" required>
+              </div>
+              <div class="h10"></div>
+              <img src="<?php echo url('index','validate'); ?>" alt="验证码" onclick="this.src='<?php echo url('index','validate').'&rand='; ?>'+Math.random();" title="点击刷新">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              <button type="submit" class="btn btn-primary">确定</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- /注册框 -->
+
+    <!-- 登陆框 -->
+    <div class="modal login fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">登陆</h4>
+          </div>
+          <form action="<?php echo url('login','store'); ?>" method="post">
+            <div class="modal-body">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                <input type="email" class="form-control" placeholder="邮箱" name="email" required>
+              </div>
+              <div class="h10"></div>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" class="form-control" placeholder="密码" name="pass" required>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+              <button type="submit" class="btn btn-primary">确定</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- /登陆框 -->
+  </div>
+</body>
+</html>
